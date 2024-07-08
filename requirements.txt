@@ -1,0 +1,8 @@
+faster-whisper
+langchain-core
+langchain-openai
+openai
+pyaudio
+python-dotenv
+rich
+speechrecognition
