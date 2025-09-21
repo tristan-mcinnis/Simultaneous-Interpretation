@@ -7,6 +7,8 @@ from typing import Optional
 
 from dotenv import load_dotenv
 
+from .openai_models import DEFAULT_TTS_MODEL, DEFAULT_TRANSLATION_MODEL
+
 
 @dataclass(slots=True)
 class AppConfig:
@@ -76,9 +78,9 @@ def build_config(args) -> AppConfig:
         enable_tts=bool(getattr(args, "tts", False)),
         dictionary_path=dictionary_path,
         topic=getattr(args, "topic", ""),
-        openai_model=getattr(args, "model", "gpt-4o"),
+        openai_model=getattr(args, "model", DEFAULT_TRANSLATION_MODEL),
         tts_voice=getattr(args, "voice", "alloy"),
-        tts_model=getattr(args, "tts_model", "gpt-4o-mini-tts"),
+        tts_model=getattr(args, "tts_model", DEFAULT_TTS_MODEL),
         transcriber=getattr(args, "transcriber", "whispercpp"),
         whisper_model=getattr(args, "whisper_model", "base.en"),
         whisper_threads=whisper_threads,

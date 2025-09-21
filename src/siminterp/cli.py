@@ -3,6 +3,13 @@ from __future__ import annotations
 import argparse
 from typing import Sequence
 
+from .openai_models import (
+    DEFAULT_TTS_MODEL,
+    DEFAULT_TRANSLATION_MODEL,
+    TTS_MODELS,
+    TRANSLATION_MODELS,
+)
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -48,10 +55,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--model",
-        default="gpt-4o",
+        default=DEFAULT_TRANSLATION_MODEL,
+        choices=TRANSLATION_MODELS,
         help=(
             "OpenAI model identifier to use for translation. "
-            "Use available released models such as gpt-4o, gpt-4o-mini, etc."
+            "Currently supported options include gpt-5, gpt-5-mini, gpt-5-nano, gpt-4o, and gpt-4o-mini."
         ),
     )
     parser.add_argument(
@@ -62,8 +70,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--tts-model",
-        default="gpt-4o-mini-tts",
-        help="OpenAI text-to-speech model to use when --tts is enabled.",
+        default=DEFAULT_TTS_MODEL,
+        choices=TTS_MODELS,
+        help=(
+            "OpenAI text-to-speech model to use when --tts is enabled. "
+            "Select from the latest releases such as gpt-4o-mini-tts, gpt-4.1-tts, or gpt-4.1-mini-tts."
+        ),
     )
     parser.add_argument(
         "--voice",

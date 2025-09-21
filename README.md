@@ -8,15 +8,16 @@ mix and match components that fit your environment.
 - **Real-time transcription with whisper.cpp** – default backend uses the `whispercpp` Python bindings so you can run highly
   optimized Whisper models locally on CPU (perfect for macOS laptops). A `faster-whisper` fallback is available for systems that
   already rely on those weights.
-- **Flexible OpenAI translation** – choose any publicly released OpenAI chat model (e.g., `gpt-4o`, `gpt-4o-mini`) via a command-line
-  argument. The translation step respects conversation topic hints and remembers recent context for smoother phrasing.
+- **Flexible OpenAI translation** – select from the latest OpenAI releases (including `gpt-5`, `gpt-5-mini`, `gpt-5-nano`, `gpt-4o`, and
+  `gpt-4o-mini`) via a command-line argument. The translation step respects conversation topic hints and remembers recent context for
+  smoother phrasing.
 - **Optional text-to-speech playback** – stream translations back through your speakers using the OpenAI text-to-speech API with your
-  preferred voice and speed.
+  preferred voice, speed, and any of the current models (`gpt-4o-mini-tts`, `gpt-4.1-tts`, or `gpt-4.1-mini-tts`).
 - **Domain dictionaries and logging** – import custom terminology mappings, review transcripts in the terminal, and export a tidy log
   to your Downloads folder after each session.
 
-> **Note:** OpenAI has not released GPT-5 models. Use currently available models such as `gpt-4o` or `gpt-4o-mini` and update the
-> `--model` argument whenever new publicly documented models appear.
+> **Note:** The CLI enforces the documented OpenAI model catalog. Update `src/siminterp/openai_models.py` when OpenAI publishes additional
+> identifiers.
 
 ## Prerequisites
 - Python 3.10 or newer.
@@ -64,8 +65,8 @@ python -m siminterp \
   --output-device 3 \
   --translate \
   --tts \
-  --model gpt-4o \
-  --tts-model gpt-4o-mini-tts \
+  --model gpt-5-mini \
+  --tts-model gpt-4.1-mini-tts \
   --voice alloy \
   --whisper-model ~/Models/ggml-base.en.bin
 ```
@@ -84,6 +85,22 @@ Run `python -m siminterp --help` to view the full list of options, including:
 - `--history` to control how many previous translations are shared as context.
 - `--tts-speed` to fine-tune playback speed.
 - `--phrase-time-limit` and `--ambient-duration` to tailor microphone capture windows.
+
+### Supported OpenAI models
+
+Translation (`--model`):
+- `gpt-5` – full capability flagship model for the highest quality output.
+- `gpt-5-mini` – balanced performance and cost; ideal default for real-time interpreting.
+- `gpt-5-nano` – lightweight variant when you need ultra-low latency or lower usage costs.
+- `gpt-4o` – previous generation flagship still compatible with the workflow.
+- `gpt-4o-mini` – economical GPT-4o option.
+
+Text-to-speech (`--tts-model`):
+- `gpt-4o-mini-tts` – versatile streaming synthesis with broad voice coverage.
+- `gpt-4.1-tts` – highest quality neural voice rendering.
+- `gpt-4.1-mini-tts` – faster, cost-effective voice synthesis for extended sessions.
+
+When OpenAI introduces additional identifiers you can extend these lists in `src/siminterp/openai_models.py` so they appear automatically in the CLI and configuration defaults.
 
 ## Custom dictionary format
 ```
