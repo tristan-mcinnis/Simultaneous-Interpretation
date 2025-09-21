@@ -27,16 +27,34 @@ mix and match components that fit your environment.
   whisper.cpp repository and place it somewhere accessible.
 
 ## Installation
+
+### Option 1 – quick setup with [uv](https://github.com/astral-sh/uv)
+[`uv`](https://github.com/astral-sh/uv) is a drop-in replacement for `pip` and `virtualenv` that installs
+dependencies in parallel. It works great on macOS (our primary development platform) and dramatically speeds up
+environment creation.
+
+Install `uv` (macOS/Linux shell script):
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Then bootstrap the project:
+```bash
+git clone https://github.com/yourusername/simultaneous-interpretation.git
+cd simultaneous-interpretation
+uv venv
+source .venv/bin/activate  # On Windows use `.venv\\Scripts\\activate`
+uv pip install -r requirements.txt
+export PYTHONPATH="$PWD/src"
+```
+
+### Option 2 – standard `venv` + `pip`
 ```bash
 git clone https://github.com/yourusername/simultaneous-interpretation.git
 cd simultaneous-interpretation
 python -m venv .venv
 source .venv/bin/activate  # On Windows use `.venv\\Scripts\\activate`
 pip install -r requirements.txt
-```
-
-Add the source tree to your Python path so the package is importable without installation:
-```bash
 export PYTHONPATH="$PWD/src"
 ```
 
