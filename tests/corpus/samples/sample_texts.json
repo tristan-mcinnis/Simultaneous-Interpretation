@@ -1,0 +1,71 @@
+{
+  "description": "Sample texts for testing when audio files are not available",
+  "short_utterances": [
+    {
+      "id": "short_001",
+      "chinese": "你好，很高兴见到你。",
+      "english": "Hello, nice to meet you.",
+      "category": "greeting"
+    },
+    {
+      "id": "short_002",
+      "chinese": "请问这个多少钱？",
+      "english": "How much does this cost?",
+      "category": "question"
+    },
+    {
+      "id": "short_003",
+      "chinese": "今天天气真好。",
+      "english": "The weather is really nice today.",
+      "category": "statement"
+    },
+    {
+      "id": "short_004",
+      "chinese": "我想预约下周二的会议。",
+      "english": "I'd like to schedule a meeting for next Tuesday.",
+      "category": "request"
+    },
+    {
+      "id": "short_005",
+      "chinese": "非常感谢您的帮助。",
+      "english": "Thank you very much for your help.",
+      "category": "gratitude"
+    }
+  ],
+  "medium_segments": [
+    {
+      "id": "medium_001",
+      "chinese": "各位同事，今天我们要讨论的是公司的年度发展计划。首先，让我回顾一下去年的成绩。我们的销售额增长了百分之二十，客户满意度也有显著提升。",
+      "english": "Colleagues, today we're going to discuss the company's annual development plan. First, let me review last year's achievements. Our sales grew by 20%, and customer satisfaction also improved significantly.",
+      "category": "business_presentation"
+    },
+    {
+      "id": "medium_002",
+      "chinese": "在人工智能领域，机器学习算法已经取得了巨大的进步。深度学习技术使得图像识别和自然语言处理的准确率大幅提高。这些技术正在改变我们的生活方式。",
+      "english": "In the field of artificial intelligence, machine learning algorithms have made tremendous progress. Deep learning technology has significantly improved the accuracy of image recognition and natural language processing. These technologies are changing the way we live.",
+      "category": "technical"
+    }
+  ],
+  "technical_content": [
+    {
+      "id": "tech_001",
+      "chinese": "该系统采用微服务架构，每个服务都独立部署在容器中。我们使用Kubernetes进行容器编排，配合服务网格来管理服务间的通信。",
+      "english": "The system uses a microservices architecture, with each service independently deployed in containers. We use Kubernetes for container orchestration, combined with a service mesh to manage inter-service communication.",
+      "category": "software_engineering"
+    },
+    {
+      "id": "tech_002",
+      "chinese": "根据最新的财务报告，本季度的营业收入达到了五亿美元，同比增长百分之十五。毛利率保持在百分之四十二的水平。",
+      "english": "According to the latest financial report, operating revenue for this quarter reached 500 million dollars, a 15% year-over-year increase. Gross margin remained at 42%.",
+      "category": "finance"
+    }
+  ],
+  "conversational": [
+    {
+      "id": "conv_001",
+      "chinese": "嗯，那个，就是说，我觉得这个方案呢，可能需要再考虑一下。因为，你看，成本方面可能会有些问题。",
+      "english": "Um, well, what I mean is, I think this proposal, well, might need more consideration. Because, you see, there might be some issues with the cost.",
+      "category": "informal_discussion"
+    }
+  ]
+}

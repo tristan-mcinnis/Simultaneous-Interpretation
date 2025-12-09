@@ -1,0 +1,49 @@
+# Architecture B: Hybrid Local Pipeline
+# STT: whisper.cpp (local) + Translation: Qwen2.5 via LM Studio (local) + TTS: OpenAI TTS (cloud)
+
+name: "hybrid_local"
+description: "whisper.cpp + Qwen2.5 via LM Studio + OpenAI TTS"
+
+stt:
+  engine: "whispercpp"
+  model: "ggml-medium.bin"
+  model_path: "~/Models/ggml-medium.bin"
+  language: "zh"
+  chunk_duration_sec: 3
+  threads: null
+  vad_threshold: 0.5
+
+translation:
+  engine: "lmstudio"
+  endpoint: "http://localhost:1234/v1/chat/completions"
+  # Models: qwen2.5-7b-instruct (Q4_K_M), qwen2.5-14b-instruct (Q4_K_M)
+  model: "qwen2.5-7b-instruct"
+  temperature: 0.3
+  max_tokens: 512
+  system_prompt: |
+    You are a professional simultaneous interpreter. Translate the following
+    Chinese text to natural English. Maintain the speaker's tone and intent.
+    Output only the translation, no explanations.
+  context_window: 10
+
+tts:
+  engine: "openai"
+  model: "gpt-4o-mini-tts"
+  voice: "nova"
+  speed: 1.0
+  format: "pcm"
+  sample_rate: 24000
+
+# LM Studio specific configuration
+lmstudio:
+  # GPU layers for Apple Silicon (adjust based on available memory)
+  gpu_layers: -1  # -1 means use all available
+  context_length: 4096
+  # Expected performance on M5 MacBook Pro
+  expected_tokens_per_sec: 40  # 7B model
+
+characteristics:
+  latency: "medium"  # Local translation reduces latency
+  quality: "medium-high"  # Qwen2.5 is capable but may not match GPT-4
+  cost: "low"  # Only TTS uses cloud API
+  reliability: "high"  # Less network dependency
