@@ -6,29 +6,21 @@ from typing import Tuple
 
 # Translation/chat models that are known to work well with the interpreter pipeline.
 TRANSLATION_MODELS: Tuple[str, ...] = (
-    "gpt-5",
-    "gpt-5-mini",
-    "gpt-5-nano",
     "gpt-4o",
     "gpt-4o-mini",
+    "gpt-4-turbo",
+    "gpt-3.5-turbo",
 )
 
 # Default translation model keeps compatibility with previous releases while
 # allowing users to upgrade explicitly.
 DEFAULT_TRANSLATION_MODEL = "gpt-4o"
 
-# Models that require the Responses API instead of the legacy Chat Completions endpoint.
-RESPONSES_ONLY_MODELS = frozenset({
-    "gpt-5",
-    "gpt-5-mini",
-    "gpt-5-nano",
-})
-
 # Latest text-to-speech models available from OpenAI.
 TTS_MODELS: Tuple[str, ...] = (
     "gpt-4o-mini-tts",
-    "gpt-4.1-tts",
-    "gpt-4.1-mini-tts",
+    "tts-1",
+    "tts-1-hd",
 )
 
 DEFAULT_TTS_MODEL = "gpt-4o-mini-tts"

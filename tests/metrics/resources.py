@@ -349,9 +349,11 @@ class CostEstimator:
     PRICING = {
         "gpt-4o-mini": {"input": 0.00015, "output": 0.0006},  # per 1K tokens
         "gpt-4o": {"input": 0.0025, "output": 0.01},  # per 1K tokens
-        "gpt-5-mini": {"input": 0.0003, "output": 0.0012},  # estimated
+        "gpt-4-turbo": {"input": 0.01, "output": 0.03},  # per 1K tokens
+        "gpt-3.5-turbo": {"input": 0.0005, "output": 0.0015},  # per 1K tokens
         "gpt-4o-mini-tts": {"per_char": 0.000015},  # per character
-        "gpt-4.1-tts": {"per_char": 0.00003},  # estimated
+        "tts-1": {"per_char": 0.000015},  # per character
+        "tts-1-hd": {"per_char": 0.00003},  # per character
     }
 
     def __init__(self):

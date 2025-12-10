@@ -16,7 +16,7 @@ stt:
 
 translation:
   engine: "openai"
-  # Models: gpt-4o-mini (baseline), gpt-5-mini (if available)
+  # Models: gpt-4o-mini (baseline), gpt-4o (higher quality)
   model: "gpt-4o-mini"
   temperature: 0.3
   max_tokens: 512

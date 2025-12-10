@@ -272,10 +272,6 @@ class OpenAITranslationClient(BaseTranslationClient):
             "Output only the translation, no explanations."
         )
 
-        # Check if model uses Responses API
-        self._responses_only_models = {"gpt-5", "gpt-5-mini", "gpt-5-nano"}
-        self._uses_responses_api = model in self._responses_only_models
-
     def translate(
         self,
         text: str,
@@ -289,10 +285,7 @@ class OpenAITranslationClient(BaseTranslationClient):
 
         start_time = time.perf_counter()
 
-        if self._uses_responses_api:
-            result = self._translate_responses_api(user_content)
-        else:
-            result = self._translate_chat_completions(user_content)
+        result = self._translate_chat_completions(user_content)
 
         latency_ms = (time.perf_counter() - start_time) * 1000
 
@@ -347,32 +340,6 @@ class OpenAITranslationClient(BaseTranslationClient):
             "text": response.choices[0].message.content.strip(),
             "tokens": response.usage.total_tokens if response.usage else None,
         }
-
-    def _translate_responses_api(self, user_content: str) -> dict:
-        """Use Responses API for GPT-5 models."""
-        response = self.client.responses.create(
-            model=self.model,
-            input=f"{self.system_prompt}\n\n{user_content}",
-            temperature=self.temperature,
-            max_output_tokens=self.max_tokens,
-        )
-
-        # Extract text from response
-        text = ""
-        if hasattr(response, "output_text"):
-            text = response.output_text
-        elif hasattr(response, "output"):
-            for item in response.output:
-                if hasattr(item, "content"):
-                    for content in item.content:
-                        if hasattr(content, "text"):
-                            text += content.text
-
-        tokens = None
-        if hasattr(response, "usage") and response.usage:
-            tokens = getattr(response.usage, "total_tokens", None)
-
-        return {"text": text.strip(), "tokens": tokens}
 
 
 class LMStudioClient(BaseTranslationClient):

@@ -59,7 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=TRANSLATION_MODELS,
         help=(
             "OpenAI model identifier to use for translation. "
-            "Currently supported options include gpt-5, gpt-5-mini, gpt-5-nano, gpt-4o, and gpt-4o-mini."
+            "Supported options: gpt-4o, gpt-4o-mini, gpt-4-turbo, and gpt-3.5-turbo."
         ),
     )
     parser.add_argument(
@@ -74,7 +74,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=TTS_MODELS,
         help=(
             "OpenAI text-to-speech model to use when --tts is enabled. "
-            "Select from the latest releases such as gpt-4o-mini-tts, gpt-4.1-tts, or gpt-4.1-mini-tts."
+            "Available models: gpt-4o-mini-tts, tts-1, or tts-1-hd."
         ),
     )
     parser.add_argument(
