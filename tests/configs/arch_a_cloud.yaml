@@ -1,0 +1,42 @@
+# Architecture A: Cloud-Based Pipeline
+# STT: whisper.cpp (local) + Translation: OpenAI GPT (cloud) + TTS: OpenAI TTS (cloud)
+
+name: "cloud_based"
+description: "whisper.cpp + OpenAI GPT + OpenAI TTS"
+
+stt:
+  engine: "whispercpp"
+  # Models to test: ggml-base.bin, ggml-small.bin, ggml-medium.bin
+  model: "ggml-medium.bin"
+  model_path: "~/Models/ggml-medium.bin"
+  language: "zh"
+  chunk_duration_sec: 3
+  threads: null  # Auto-detect
+  vad_threshold: 0.5
+
+translation:
+  engine: "openai"
+  # Models: gpt-4o-mini (baseline), gpt-5-mini (if available)
+  model: "gpt-4o-mini"
+  temperature: 0.3
+  max_tokens: 512
+  system_prompt: |
+    You are a professional simultaneous interpreter. Translate the following
+    Chinese text to natural English. Maintain the speaker's tone and intent.
+    Output only the translation, no explanations.
+  context_window: 10  # Previous chunks to include for context
+
+tts:
+  engine: "openai"
+  model: "gpt-4o-mini-tts"
+  voice: "nova"
+  speed: 1.0
+  format: "pcm"
+  sample_rate: 24000
+
+# Expected characteristics
+characteristics:
+  latency: "medium-high"  # Network latency for cloud calls
+  quality: "high"  # Best translation quality expected
+  cost: "high"  # API costs per hour
+  reliability: "high"  # Depends on network/API availability

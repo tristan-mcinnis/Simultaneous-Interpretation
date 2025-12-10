@@ -1,0 +1,57 @@
+# Architecture C: Fully Local Pipeline
+# STT: whisper.cpp (local) + Translation: Qwen2.5 via LM Studio (local) + TTS: VibeVoice (local)
+
+name: "fully_local"
+description: "whisper.cpp + Qwen2.5 via LM Studio + VibeVoice"
+
+stt:
+  engine: "whispercpp"
+  model: "ggml-medium.bin"
+  model_path: "~/Models/ggml-medium.bin"
+  language: "zh"
+  chunk_duration_sec: 3
+  threads: null
+  vad_threshold: 0.5
+
+translation:
+  engine: "lmstudio"
+  endpoint: "http://localhost:1234/v1/chat/completions"
+  model: "qwen2.5-7b-instruct"
+  temperature: 0.3
+  max_tokens: 512
+  system_prompt: |
+    You are a professional simultaneous interpreter. Translate the following
+    Chinese text to natural English. Maintain the speaker's tone and intent.
+    Output only the translation, no explanations.
+  context_window: 10
+
+tts:
+  engine: "vibevoice"
+  endpoint: "ws://localhost:8765"
+  model: "vibevoice-realtime-0.5b"
+  model_path: "~/Models/vibevoice-realtime-0.5b"
+  sample_rate: 24000
+  # VibeVoice specific settings
+  speaker_id: null  # Use default speaker
+  speed: 1.0
+
+# LM Studio configuration
+lmstudio:
+  gpu_layers: -1
+  context_length: 4096
+  expected_tokens_per_sec: 40
+
+# VibeVoice configuration
+vibevoice:
+  # WebSocket server settings
+  host: "localhost"
+  port: 8765
+  # Model settings
+  use_gpu: true  # Use Metal/MPS on Apple Silicon
+  # Expected first-audio latency: ~300ms
+
+characteristics:
+  latency: "low"  # All local processing
+  quality: "medium"  # VibeVoice quality may vary
+  cost: "zero"  # No API costs
+  reliability: "very_high"  # No network dependency

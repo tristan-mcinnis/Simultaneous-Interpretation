@@ -1,0 +1,37 @@
+# Testing framework dependencies
+# Install with: pip install -r tests/requirements.txt
+
+# Core dependencies (also in main requirements.txt)
+whispercpp>=0.1.0
+openai>=1.35.0
+python-dotenv
+
+# Audio processing
+numpy>=1.24.0
+scipy>=1.10.0
+pydub>=0.25.0
+
+# HTTP client for LM Studio
+httpx>=0.24.0
+
+# WebSocket client for VibeVoice
+websockets>=12.0
+
+# Resource monitoring
+psutil>=5.9.0
+
+# Configuration
+pyyaml>=6.0
+
+# Quality metrics
+sacrebleu>=2.3.0  # BLEU scoring
+
+# Optional: Neural translation quality (large download)
+# unbabel-comet>=2.0.0  # COMET scoring
+
+# Data handling and reporting
+pandas>=2.0.0
+rich>=13.0.0
+
+# Optional: Visualization
+# matplotlib>=3.7.0
